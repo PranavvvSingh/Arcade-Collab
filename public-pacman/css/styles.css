@@ -1,0 +1,19 @@
+body{
+    background-color: black;
+    text-align: center;
+    margin: 0;
+}
+p{
+    color: white;
+    display: inline-block;
+    border-radius: 10px;
+    font-size: 20px;
+    margin: 5px 0;
+    width: 120px;
+    background-color: rgba(0,0,255,0.8);
+    color: black;
+    font-weight: bold;
+}
+div{
+    text-align: center;
+}
