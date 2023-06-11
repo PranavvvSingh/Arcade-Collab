@@ -19,20 +19,20 @@ const userSchema=mongoose.Schema({
 })
 let user=mongoose.model("users",userSchema)
 
+// get method not required anymore since 
+// signup.ejs is being rendered by index.js now
 app.get("/",function(req,res){
-    
-  console.log("hi");  
     res.render("signup")
 })
+
 app.post("/",async function(req,res){
     const userEmail=req.body.email
     const userName=req.body.name
+    const game=req.body.gameCalled
     let data=new user({name:userName,email:userEmail})
     let result=await data.save()
     console.log(result)
-    // res.sendFile(__dirname+ '/public-flappy/index.html')
-    // console.log(req.body);
-    // res.redirect("/"+gameName);
-    // res.sendFile(__dirname+" public-"+req.body.gameName+"\index.html");
+    console.log(game)
+    res.redirect("/"+game)
 })
 module.exports=app
