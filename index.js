@@ -19,7 +19,6 @@ app.use("/signup",signup)
 // app.use("/midpacman",express.static("public-signup"))
 
 app.get("/",function(req,res){
-    // res.sendFile(__dirname+"/public/index.html");
     res.sendFile(index.html)
 })
 
@@ -34,16 +33,13 @@ app.get("/midpacman",function(req,res){
 })
 
 app.get("/flappy",function(req,res){
-    // res.sendFile(__dirname+"/public-flappy/index.html");
-    res.sendFile(index.html);
+    res.render("flappy");
 })
 app.get("/galaxy",function(req,res){
-    // res.sendFile(__dirname+"/public-galaxy/index.html");
-    res.sendFile(index.html);
+    res.render("galaxy");
 })
 app.get("/pacman",function(req,res){
-    // res.sendFile(__dirname+"/public-pacman/index.html");
-    res.sendFile(index.html);
+    res.render("pacman");
 })
 
 
