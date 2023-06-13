@@ -1,5 +1,6 @@
 const express=require("express")
-const signup=require("./signup.js")
+const index=require("./signup.js")
+let {signup, user}= index
 const app=express()
 app.use(express.json())
 app.use(express.urlencoded({

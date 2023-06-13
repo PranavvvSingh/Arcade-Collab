@@ -35,4 +35,5 @@ app.post("/",async function(req,res){
     console.log(game)
     res.redirect("/"+game)
 })
-module.exports=app
+module.exports.signup=app
+module.exports.user=user
