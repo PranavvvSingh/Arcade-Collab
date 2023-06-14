@@ -1,6 +1,9 @@
 const express=require("express")
-const index=require("./signup.js")
-let {signup, user}= index
+const signupPage=require("./signup.js")
+const arcade=require("./collection.js")
+
+let {signup, user}=signupPage
+
 const app=express()
 app.use(express.json())
 app.use(express.urlencoded({
@@ -8,16 +11,8 @@ app.use(express.urlencoded({
 }))
 app.set("view engine","ejs")
 app.use("/",express.static("public"))
-app.use("/flappy",express.static("public-flappy"))
-app.use("/galaxy",express.static("public-galaxy"))
-app.use("/pacman",express.static("public-pacman"))
 
 app.use("/signup",signup)
-// do you want to serve signup page directly?
-
-// app.use("/midflappy",express.static("public-signup"))
-// app.use("/midgalaxy",express.static("public-signup"))
-// app.use("/midpacman",express.static("public-signup"))
 
 app.get("/",function(req,res){
     res.sendFile(index.html)
@@ -33,13 +28,29 @@ app.get("/midpacman",function(req,res){
     res.render("signup",{game:"pacman"})
 })
 
-app.get("/flappy",function(req,res){
+
+
+app.use("/flappy",async function(req,res,next){
+    let data=await arcade.updateOne({game:"flappy"},{$inc:{timesPlayed:1}})
+    console.log(data)
+    next();
+}, function(req,res){
     res.render("flappy");
 })
-app.get("/galaxy",function(req,res){
+
+app.get("/galaxy",async function(req,res,next){
+    let data=await arcade.updateOne({game:"galaxy"},{$inc:{timesPlayed:1}})
+    console.log(data)
+    next();
+},function(req,res){
     res.render("galaxy");
 })
-app.get("/pacman",function(req,res){
+
+app.get("/pacman",async function(req,res,next){
+    let data=await arcade.updateOne({game:"pacman"},{$inc:{timesPlayed:1}})
+    console.log(data)
+    next();
+},function(req,res){
     res.render("pacman");
 })
 

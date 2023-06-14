@@ -16,7 +16,7 @@ class Player{
         }
         this.rotate=0
         const img=new Image()
-        img.src="images/spaceship.png"
+        img.src="galaxyimages/spaceship.png"
         const scale=0.15
         img.onload=()=>{
             this.image=img
@@ -86,7 +86,7 @@ class Invader{
             x:0,y:0
         }
         const img=new Image()
-        img.src="images/invader.png"
+        img.src="galaxyimages/invader.png"
         const scale=1
         img.onload=()=>{
             this.image=img
