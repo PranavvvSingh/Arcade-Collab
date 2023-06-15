@@ -30,12 +30,22 @@ app.get("/midpacman",function(req,res){
 
 
 
-app.use("/flappy",async function(req,res,next){
+app.get("/flappy",async function(req,res,next){
     let data=await arcade.updateOne({game:"flappy"},{$inc:{timesPlayed:1}}) 
     console.log(data)
     next();
 }, function(req,res){
     res.render("flappy");
+})
+app.post("/flappy",async function(req,res){
+    let newScore=req.body.finalScore;
+    let data=await arcade.find({game:"flappy"});
+    let oldScore=data[0].highScore;
+    if(newScore>oldScore){
+        await arcade.updateOne({game:"flappy"},{$set:{highScore:newScore}})
+        oldScore=newScore
+    }
+    res.render("gameover",{data:{newScore:newScore, oldScore:oldScore}})
 })
 
 app.get("/galaxy",async function(req,res,next){
