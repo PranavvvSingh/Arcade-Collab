@@ -254,6 +254,7 @@ function animate(){
                 },0)
                 setTimeout(()=>{
                     game.active=false
+                    gameOver();
                 },1000)
                 createParticles({
                     object:player,color:"white",fades:true
@@ -367,3 +368,9 @@ document.addEventListener("keyup",function({key}){
         break
     }
 })
+
+function gameOver(){
+    console.log("inside if condition")
+    document.querySelector('input[name="finalScore"]').value=score;
+    document.querySelector("#form").submit();
+}

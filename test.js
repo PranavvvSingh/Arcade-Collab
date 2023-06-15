@@ -10,8 +10,13 @@ async function connect(){
     })
 
     let model=mongoose.model("consoles",consoleSchema)
-    let data=await model.updateOne({game:"flappy"},{$inc:{timesPlayed:1}})
+    let data=await model.find({game:"galaxy"});
     console.log(data)
+
+    // if(data[0].highScore<100){
+    //     await model.updateOne({game:"galaxy"},{$set:{highScore:125}})
+    // }
+    // console.log(data[0].highScore)
     mongoose.connection.close();
 }
 connect();

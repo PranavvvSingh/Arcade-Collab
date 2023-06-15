@@ -31,7 +31,7 @@ app.get("/midpacman",function(req,res){
 
 
 app.use("/flappy",async function(req,res,next){
-    let data=await arcade.updateOne({game:"flappy"},{$inc:{timesPlayed:1}})
+    let data=await arcade.updateOne({game:"flappy"},{$inc:{timesPlayed:1}}) 
     console.log(data)
     next();
 }, function(req,res){
@@ -44,6 +44,15 @@ app.get("/galaxy",async function(req,res,next){
     next();
 },function(req,res){
     res.render("galaxy");
+})
+app.post("/galaxy",async function(req,res){
+    let newScore=req.body.finalScore;
+    let data=await arcade.find({game:"galaxy"});
+    let oldScore=data[0].highScore;
+    if(newScore>oldScore){
+        await arcade.updateOne({game:"galaxy"},{$set:{highScore:newScore}})
+    }
+    res.render("gameover",{data:{newScore:newScore, oldScore:oldScore}})
 })
 
 app.get("/pacman",async function(req,res,next){
