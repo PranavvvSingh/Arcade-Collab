@@ -29,9 +29,13 @@ app.post("/",async function(req,res){
     const userEmail=req.body.email
     const userName=req.body.name
     const game=req.body.gameCalled
-    let data=new user({name:userName,email:userEmail})
+    let x=await user.find({email:userEmail}) // to check if the email already exists in db
+    if (x.length==0){
+        let data=new user({name:userName,email:userEmail})
     let result=await data.save()
     console.log(result)
+    }
+    
     console.log(game)
     res.redirect("/"+game)
 })
