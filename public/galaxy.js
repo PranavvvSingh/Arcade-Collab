@@ -370,7 +370,7 @@ document.addEventListener("keyup",function({key}){
 })
 
 function gameOver(){
-    console.log("inside if condition")
+    console.log("inside function call")
     document.querySelector('input[name="finalScore"]').value=score;
     document.querySelector("#form").submit();
 }

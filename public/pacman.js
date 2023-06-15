@@ -236,6 +236,7 @@ function animate(){
         if(pellets.length==0){
             document.querySelector("p").innerText="You Win!";
             cancelAnimationFrame(annimationId)
+            gameOver();
         }
         else document.querySelector("#score").innerText=score;
     }
@@ -262,6 +263,7 @@ function animate(){
             if(!ghost.scared){
                 document.querySelector("p").innerHTML="Game Over"
                 cancelAnimationFrame(annimationId)
+                gameOver();
             }
             else ghosts.splice(x,1)
         }
@@ -347,3 +349,9 @@ window.addEventListener('keyup',(event)=>{
         break
     }
 })
+
+function gameOver(){
+    console.log("inside function call")
+    document.querySelector('input[name="finalScore"]').value=score;
+    document.querySelector("#form").submit();
+}

@@ -51,6 +51,7 @@ app.post("/galaxy",async function(req,res){
     let oldScore=data[0].highScore;
     if(newScore>oldScore){
         await arcade.updateOne({game:"galaxy"},{$set:{highScore:newScore}})
+        oldScore=newScore
     }
     res.render("gameover",{data:{newScore:newScore, oldScore:oldScore}})
 })
@@ -61,6 +62,16 @@ app.get("/pacman",async function(req,res,next){
     next();
 },function(req,res){
     res.render("pacman");
+})
+app.post("/pacman",async function(req,res){
+    let newScore=req.body.finalScore;
+    let data=await arcade.find({game:"pacman"});
+    let oldScore=data[0].highScore;
+    if(newScore>oldScore){
+        await arcade.updateOne({game:"pacman"},{$set:{highScore:newScore}})
+        oldScore=newScore
+    }
+    res.render("gameover",{data:{newScore:newScore, oldScore:oldScore}})
 })
 
 
