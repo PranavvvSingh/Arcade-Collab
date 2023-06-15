@@ -35,9 +35,11 @@ app.get("/flappy",async function(req,res,next){
     console.log(data)
     next();
 }, function(req,res){
-    res.render("flappy");
+    res.render("flappy",{id:req.query.id});
 })
 app.post("/flappy",async function(req,res){
+    // let objectId=req.body.userId;
+    // res.send(objectId)
     let newScore=req.body.finalScore;
     let data=await arcade.find({game:"flappy"});
     let oldScore=data[0].highScore;

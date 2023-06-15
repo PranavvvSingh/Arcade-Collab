@@ -37,7 +37,7 @@ app.post("/",async function(req,res){
     }
     
     console.log(game)
-    res.redirect("/"+game)
+    res.redirect("/"+game+"/?id=648aff0c9d6380791bf928dd")
 })
 module.exports.signup=app
 module.exports.user=user
