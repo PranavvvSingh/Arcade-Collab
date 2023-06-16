@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="http://localhost:3000/">
     <link rel="stylesheet" href="css/galaxy.css">
     <title>Galaxy Invaders</title>
 </head>
@@ -12,6 +13,7 @@
 
     <form action="/galaxy" method="post" id="form">
         <input type="hidden" id="finalScore" name="finalScore" value="">
+        <input type="hidden" id="userId" name="userId" value="<%=id%>">
     </form>
     
 </body>

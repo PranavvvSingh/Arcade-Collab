@@ -38,16 +38,26 @@ app.get("/flappy",async function(req,res,next){
     res.render("flappy",{id:req.query.id});
 })
 app.post("/flappy",async function(req,res){
-    // let objectId=req.body.userId;
-    // res.send(objectId)
+    // newScore= live score from game
+    // highScore= user's highest score in users collection
+    // bestScore= highest score in consoles collection
     let newScore=req.body.finalScore;
+    let object=req.body.userId;
+
     let data=await arcade.find({game:"flappy"});
-    let oldScore=data[0].highScore;
-    if(newScore>oldScore){
-        await arcade.updateOne({game:"flappy"},{$set:{highScore:newScore}})
-        oldScore=newScore
+    let bestScore=data[0].highScore;
+
+    data=await user.findById(object);
+    let highScore=data.flappy;
+    if(highScore==null || newScore>highScore){
+        await user.findByIdAndUpdate(object,{$set:{flappy:newScore}})
+        highScore=newScore
     }
-    res.render("gameover",{data:{newScore:newScore, oldScore:oldScore}})
+    if(newScore>bestScore){
+        await arcade.updateOne({game:"flappy"},{$set:{highScore:newScore}})
+        bestScore=newScore
+    }      
+    res.render("gameover",{data:{newScore:newScore, bestScore:bestScore, highScore:highScore}})
 })
 
 app.get("/galaxy",async function(req,res,next){
@@ -55,17 +65,26 @@ app.get("/galaxy",async function(req,res,next){
     console.log(data)
     next();
 },function(req,res){
-    res.render("galaxy");
+    res.render("galaxy",{id:req.query.id});
 })
 app.post("/galaxy",async function(req,res){
     let newScore=req.body.finalScore;
+    let object=req.body.userId;
+
     let data=await arcade.find({game:"galaxy"});
-    let oldScore=data[0].highScore;
-    if(newScore>oldScore){
-        await arcade.updateOne({game:"galaxy"},{$set:{highScore:newScore}})
-        oldScore=newScore
+    let bestScore=data[0].highScore;
+
+    data=await user.findById(object);
+    let highScore=data.galaxy;
+    if(highScore==null || newScore>highScore){
+        await user.findByIdAndUpdate(object,{$set:{galaxy:newScore}})
+        highScore=newScore
     }
-    res.render("gameover",{data:{newScore:newScore, oldScore:oldScore}})
+    if(newScore>bestScore){
+        await arcade.updateOne({game:"galaxy"},{$set:{highScore:newScore}})
+        bestScore=newScore
+    }      
+    res.render("gameover",{data:{newScore:newScore, bestScore:bestScore, highScore:highScore}})
 })
 
 app.get("/pacman",async function(req,res,next){
@@ -73,17 +92,26 @@ app.get("/pacman",async function(req,res,next){
     console.log(data)
     next();
 },function(req,res){
-    res.render("pacman");
+    res.render("pacman",{id:req.query.id});
 })
 app.post("/pacman",async function(req,res){
     let newScore=req.body.finalScore;
+    let object=req.body.userId;
+
     let data=await arcade.find({game:"pacman"});
-    let oldScore=data[0].highScore;
-    if(newScore>oldScore){
-        await arcade.updateOne({game:"pacman"},{$set:{highScore:newScore}})
-        oldScore=newScore
+    let bestScore=data[0].highScore;
+
+    data=await user.findById(object);
+    let highScore=data.pacman;
+    if(highScore==null || newScore>highScore){
+        await user.findByIdAndUpdate(object,{$set:{pacman:newScore}})
+        highScore=newScore
     }
-    res.render("gameover",{data:{newScore:newScore, oldScore:oldScore}})
+    if(newScore>bestScore){
+        await arcade.updateOne({game:"pacman"},{$set:{highScore:newScore}})
+        bestScore=newScore
+    }      
+    res.render("gameover",{data:{newScore:newScore, bestScore:bestScore, highScore:highScore}})
 })
 
 
