@@ -38,7 +38,7 @@ app.post("/",async function(req,res){
     }
     else result=x[0]._id;
     console.log(game)
-    res.redirect("/"+game+"/?id="+String(result._id))
+    res.redirect("/game/"+game+"/?id="+String(result._id))
 })
 module.exports.signup=app
 module.exports.user=user
