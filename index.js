@@ -9,22 +9,8 @@ app.use(express.json())
 app.use(express.urlencoded({
     extended:true
 }))
-
-const cookieParser = require("cookie-parser");
-const sessions = require('express-session');
-
 app.set("view engine","ejs")
 app.use("/",express.static("public"))
-app.use(cookieParser());
-
-var session;
-const oneDay = 1000 * 60 * 60 * 24;
-app.use(sessions({
-    secret: "thisismysecrctekey",
-    saveUninitialized:true,
-    cookie: { maxAge: oneDay },
-    resave: false 
-}));
 
 app.use("/signup",signup)
 
@@ -34,7 +20,6 @@ app.get("/",function(req,res){
 
 app.get("/midflappy",function(req,res){
     res.render("signup",{game:"flappy"})
-    // req.session.game="flappy"
 })
 app.get("/midgalaxy",function(req,res){
     res.render("signup",{game:"galaxy"})
